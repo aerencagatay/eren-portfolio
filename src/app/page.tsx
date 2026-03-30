@@ -241,12 +241,12 @@ export default function Home() {
           ══════════════════════════════════════════════════════ */}
       <section id="orbit" className="relative">
         {/* Title overlay */}
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-30 text-center pointer-events-none">
-          <h1 className="font-display text-5xl lg:text-7xl font-light tracking-tight text-white">
+        <div className="absolute top-6 lg:top-20 left-1/2 -translate-x-1/2 z-30 text-center pointer-events-none px-4">
+          <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-light tracking-tight text-white">
             Ahmet Eren{" "}
             <span className="italic text-gold/90">Cagatay</span>
           </h1>
-          <p className="text-white/30 text-sm mt-3 tracking-[0.3em] uppercase font-mono">
+          <p className="text-white/30 text-xs sm:text-sm mt-2 lg:mt-3 tracking-[0.3em] uppercase font-mono">
             Click nodes to explore
           </p>
         </div>
