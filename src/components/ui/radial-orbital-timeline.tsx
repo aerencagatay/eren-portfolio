@@ -39,26 +39,31 @@ export default function RadialOrbitalTimeline({
     y: 0,
   });
   const [activeNodeId, setActiveNodeId] = useState<number | null>(null);
-  const [radius, setRadius] = useState(280);
+  const [radius, setRadius] = useState<number | null>(null);
+  const [ready, setReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const orbitRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
-  /* ── responsive radius ── */
+  /* ── responsive radius — set correct size BEFORE first visible render ── */
   useEffect(() => {
-    const updateRadius = () => {
-      const w = window.innerWidth;
-      if (w < 480) setRadius(120);
-      else if (w < 768) setRadius(160);
-      else if (w < 1024) setRadius(220);
-      else setRadius(280);
+    const getRadius = (w: number) => {
+      if (w < 480) return 120;
+      if (w < 768) return 160;
+      if (w < 1024) return 220;
+      return 280;
     };
-    updateRadius();
-    window.addEventListener("resize", updateRadius);
-    return () => window.removeEventListener("resize", updateRadius);
+    setRadius(getRadius(window.innerWidth));
+    // Small delay so first paint uses correct positions without transition
+    requestAnimationFrame(() => setReady(true));
+
+    const onResize = () => setRadius(getRadius(window.innerWidth));
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const isMobile = radius <= 160;
+  const safeRadius = radius ?? 280;
+  const isMobile = safeRadius <= 160;
 
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === containerRef.current || e.target === orbitRef.current) {
@@ -135,8 +140,8 @@ export default function RadialOrbitalTimeline({
     const angle = ((index / total) * 360 + rotationAngle) % 360;
     const radian = (angle * Math.PI) / 180;
 
-    const x = radius * Math.cos(radian) + centerOffset.x;
-    const y = radius * Math.sin(radian) + centerOffset.y;
+    const x = safeRadius * Math.cos(radian) + centerOffset.x;
+    const y = safeRadius * Math.sin(radian) + centerOffset.y;
 
     const zIndex = Math.round(100 + 50 * Math.cos(radian));
     const opacity = Math.max(
@@ -172,7 +177,7 @@ export default function RadialOrbitalTimeline({
   };
 
   /* ── responsive sizes ── */
-  const orbitRingSize = radius * 2;
+  const orbitRingSize = safeRadius * 2;
   const centerSize = isMobile ? 48 : 80;
   const centerPingSize1 = isMobile ? 56 : 96;
   const centerPingSize2 = isMobile ? 64 : 112;
@@ -182,7 +187,7 @@ export default function RadialOrbitalTimeline({
 
   return (
     <div
-      className="w-full min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden"
+      className={`w-full min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden transition-opacity duration-500 ${radius === null ? "opacity-0" : "opacity-100"}`}
       ref={containerRef}
       onClick={handleContainerClick}
     >
@@ -246,7 +251,7 @@ export default function RadialOrbitalTimeline({
                 ref={(el) => {
                   nodeRefs.current[item.id] = el;
                 }}
-                className="absolute transition-all duration-700 cursor-pointer"
+                className={`absolute cursor-pointer ${ready ? "transition-all duration-700" : ""}`}
                 style={nodeStyle}
                 onClick={(e) => {
                   e.stopPropagation();
