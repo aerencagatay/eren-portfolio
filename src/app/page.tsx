@@ -324,14 +324,11 @@ export default function Home() {
           {/* Photo */}
           <div className="lg:col-span-5 flex justify-center lg:justify-start">
             <div className="relative w-72 sm:w-80 lg:w-full max-w-sm aspect-[3/4] overflow-hidden">
-              <Image
-                src="/profile.jpg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/profile.jpg`}
                 alt="Ahmet Eren Cagatay"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 320px, 400px"
-                quality={100}
-                unoptimized
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 border border-gold/15 pointer-events-none" />
               <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
