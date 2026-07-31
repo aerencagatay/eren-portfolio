@@ -1,16 +1,17 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Info } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-interface TimelineItem {
+export interface TimelineItem {
   id: number;
   title: string;
   date: string;
   content: string;
-  details?: string[];
+  /** id of the page section this node links to */
+  targetId?: string;
   category: string;
   icon: React.ElementType;
   relatedIds: number[];
@@ -348,7 +349,7 @@ export default function RadialOrbitalTimeline({
                     <CardContent className="text-xs text-white/80">
                       <p>{item.content}</p>
 
-                      {onMoreInfo && (
+                      {onMoreInfo && item.targetId && (
                         <div className="mt-4 pt-3 border-t border-white/10">
                           <Button
                             variant="outline"
@@ -357,11 +358,11 @@ export default function RadialOrbitalTimeline({
                             onClick={(e) => {
                               e.stopPropagation();
                               onMoreInfo(item);
+                              toggleItem(item.id);
                             }}
                           >
-                            <Info size={12} />
-                            More Information
-                            <ArrowRight size={10} className="text-white/60" />
+                            See full details
+                            <ArrowDown size={12} className="text-white/60" />
                           </Button>
                         </div>
                       )}
