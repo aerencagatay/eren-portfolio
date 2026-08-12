@@ -1,23 +1,17 @@
-import {
-  GraduationCap,
-  Briefcase,
-  Rocket,
-  Trophy,
-  Code2,
-  Heart,
-} from "lucide-react";
-import type { TimelineItem } from "@/components/ui/radial-orbital-timeline";
-
 /* ════════════════════════════════════════════════════════════
    Single source of truth for every piece of CV content on the
-   site. The orbit nodes and the scroll sections both read from
-   here, so a fact only ever needs changing in one place.
+   site. Every section reads from here, so a fact only ever
+   needs changing in one place.
    ════════════════════════════════════════════════════════════ */
+
+export const siteUrl = "https://aerencagatay.github.io/eren-portfolio";
 
 /* ─── Profile ─── */
 export const profile = {
   firstName: "Ahmet Eren",
   lastName: "Çağatay",
+  fullName: "Ahmet Eren Çağatay",
+  shortName: "Eren",
   initials: "AEC",
   role: "Software Engineer",
   location: "İstanbul, Türkiye",
@@ -26,7 +20,11 @@ export const profile = {
   phoneHref: "tel:+905380480428",
   linkedin: "https://linkedin.com/in/ahmet-eren-%C3%A7-04b382230",
   linkedinLabel: "Ahmet Eren Çağatay",
+  github: "https://github.com/aerencagatay",
+  githubLabel: "aerencagatay",
   photo: "/profile.jpg",
+  tagline:
+    "Software engineer in financial technology. I build the data-intensive, business-critical systems capital markets run on.",
   summary: [
     "Software engineer with over two years of experience in financial technology, holding a B.S. in Computer Science Engineering and a Minor in Finance from Sabancı University. I build data-intensive, business-critical software inside a capital-markets environment — backend services, stored procedures, data-processing components, and system integrations.",
     "My background spans Python, SQL, machine learning, anomaly detection, deep learning, and backend development. I am drawn to problems where software engineering, financial domain knowledge, and quantitative modelling meet, turning complex market data into systems people can rely on.",
@@ -285,94 +283,11 @@ export const volunteering: Volunteering[] = [
   },
 ];
 
-/* ─── Orbit nodes ─── */
-/* `targetId` points at the section each node scrolls to. */
-export const orbitNodes: TimelineItem[] = [
-  {
-    id: 1,
-    title: "Education",
-    date: "2015–2025",
-    content:
-      "B.S. in Computer Science Engineering with a Minor in Finance at Sabancı University, on a full merit scholarship.",
-    targetId: "education",
-    category: "Education",
-    icon: GraduationCap,
-    relatedIds: [2, 4],
-    status: "completed",
-    energy: 100,
-  },
-  {
-    id: 2,
-    title: "Experience",
-    date: "2023–Present",
-    content:
-      "Software Engineer at ATP Tradesoft building capital-markets software. Previously an ML intern at Turkish Aerospace Industries.",
-    targetId: "experience",
-    category: "Experience",
-    icon: Briefcase,
-    relatedIds: [1, 3, 5],
-    status: "in-progress",
-    energy: 95,
-  },
-  {
-    id: 3,
-    title: "Projects",
-    date: "2023–2024",
-    content:
-      "A deep-learning car pricing system deployed as a Twitter bot, and a second-place supply-chain optimization solution.",
-    targetId: "projects",
-    category: "Projects",
-    icon: Rocket,
-    relatedIds: [2, 4, 5],
-    status: "completed",
-    energy: 90,
-  },
-  {
-    id: 4,
-    title: "Achievements",
-    date: "2020–2024",
-    content:
-      "Ranked 623rd among ~2 million candidates in the national university entrance exam. Second place at EnGenius'24.",
-    targetId: "achievements",
-    category: "Achievements",
-    icon: Trophy,
-    relatedIds: [1, 3],
-    status: "completed",
-    energy: 100,
-  },
-  {
-    id: 5,
-    title: "Skills",
-    date: "",
-    content:
-      "Python, C++, Java, C#, JavaScript and SQL, with PyTorch, .NET and Node.js across machine learning and backend work.",
-    targetId: "skills",
-    category: "Skills",
-    icon: Code2,
-    relatedIds: [2, 3],
-    status: "completed",
-    energy: 90,
-  },
-  {
-    id: 6,
-    title: "Volunteering",
-    date: "2023–2025",
-    content:
-      "Led university students in social-impact projects on disability rights, elderly care, environmental health, and equal access.",
-    targetId: "volunteering",
-    category: "Volunteering",
-    icon: Heart,
-    relatedIds: [1],
-    status: "completed",
-    energy: 75,
-  },
-];
-
 /* ─── Navigation ─── */
-export const navLinks = [
-  "about",
-  "experience",
-  "projects",
-  "skills",
-  "contact",
+/* `id` must match the corresponding <section id> on the home page. */
+export const navSections = [
+  { id: "about", label: "About" },
+  { id: "projects", label: "Work" },
+  { id: "experience", label: "Experience" },
+  { id: "skills", label: "Skills" },
 ] as const;
