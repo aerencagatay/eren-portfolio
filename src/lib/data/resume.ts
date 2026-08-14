@@ -12,11 +12,12 @@ import LinkedinDarkSvg from '$lib/imgs/linkedin-dark.svg';
 
 import ProfileImg from '$lib/imgs/profile.jpg';
 
-// Organisation logos. ATP and Turkish Aerospace are cropped to their symbol —
-// the full wordmarks are 6:1 and 2:1, which is unreadable in a 48px badge.
-import AtpLogo from '$lib/imgs/atp-tradesoft.png';
-import TaiLogo from '$lib/imgs/turkish-aerospace.png';
+// Organisation logos — all square, which is what the 48px circular badge wants.
+import AtpLogo from '$lib/imgs/atp-tradesoft.jpg';
+import TaiLogo from '$lib/imgs/turkish-aerospace.jpg';
 import SabanciLogo from '$lib/imgs/sabanci-university.png';
+import SakipSabanciLogo from '$lib/imgs/sakip-sabanci-high-school.jpg';
+import CipLogo from '$lib/imgs/civic-involvement-projects.jpg';
 
 /** Scheme + host only — og:image needs an absolute URL and avatarUrl already carries the base path. */
 export const ORIGIN = 'https://aerencagatay.github.io';
@@ -145,7 +146,7 @@ export const DATA = {
 			badges: ['Volunteer'],
 			location: 'Sabancı University',
 			title: 'Project Leader',
-			logoUrl: SabanciLogo,
+			logoUrl: CipLogo,
 			start: 'February 2023',
 			end: 'June 2025',
 			description: 'Led student teams running social-impact projects.',
@@ -169,7 +170,7 @@ export const DATA = {
 			school: 'Sakıp Sabancı Anatolian High School',
 			href: '',
 			degree: 'High School Diploma · Graduation grade 90/100',
-			logoUrl: '',
+			logoUrl: SakipSabanciLogo,
 			start: '2015',
 			end: '2019'
 		}
