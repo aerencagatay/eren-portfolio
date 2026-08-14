@@ -12,6 +12,12 @@ import LinkedinDarkSvg from '$lib/imgs/linkedin-dark.svg';
 
 import ProfileImg from '$lib/imgs/profile.jpg';
 
+// Organisation logos. ATP and Turkish Aerospace are cropped to their symbol —
+// the full wordmarks are 6:1 and 2:1, which is unreadable in a 48px badge.
+import AtpLogo from '$lib/imgs/atp-tradesoft.png';
+import TaiLogo from '$lib/imgs/turkish-aerospace.png';
+import SabanciLogo from '$lib/imgs/sabanci-university.png';
+
 /** Scheme + host only — og:image needs an absolute URL and avatarUrl already carries the base path. */
 export const ORIGIN = 'https://aerencagatay.github.io';
 
@@ -19,9 +25,8 @@ export const ORIGIN = 'https://aerencagatay.github.io';
  * Every piece of CV content on the site lives here — the page reads from this
  * object and nothing else, so a fact only ever needs changing in one place.
  *
- * `logoUrl` is intentionally blank on work and education entries: drop the real
- * logo files into src/lib/imgs/, import them above and set them here. Until
- * then each card falls back to the organisation's initials.
+ * A blank `logoUrl` falls back to the organisation's initials. To fill one in,
+ * drop the file into src/lib/imgs/, import it above and set it here.
  */
 export const DATA = {
 	name: 'Ahmet Eren Çağatay',
@@ -101,7 +106,7 @@ export const DATA = {
 			badges: [],
 			location: 'İstanbul, Türkiye',
 			title: 'Software Engineer',
-			logoUrl: '',
+			logoUrl: AtpLogo,
 			start: 'March 2024',
 			end: 'Present',
 			description:
@@ -122,7 +127,7 @@ export const DATA = {
 			badges: [],
 			location: 'Ankara, Türkiye',
 			title: 'Machine Learning Intern',
-			logoUrl: '',
+			logoUrl: TaiLogo,
 			start: 'July 2023',
 			end: 'August 2023',
 			description:
@@ -140,7 +145,7 @@ export const DATA = {
 			badges: ['Volunteer'],
 			location: 'Sabancı University',
 			title: 'Project Leader',
-			logoUrl: '',
+			logoUrl: SabanciLogo,
 			start: 'February 2023',
 			end: 'June 2025',
 			description: 'Led student teams running social-impact projects.',
@@ -156,7 +161,7 @@ export const DATA = {
 			href: 'https://www.sabanciuniv.edu',
 			degree:
 				'B.S. Computer Science Engineering, Minor in Finance · Full merit scholarship · GPA 3.00/4.00',
-			logoUrl: '',
+			logoUrl: SabanciLogo,
 			start: '2020',
 			end: '2025'
 		},
