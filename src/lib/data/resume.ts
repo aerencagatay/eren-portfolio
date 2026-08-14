@@ -103,7 +103,7 @@ export const DATA = {
 	work: [
 		{
 			company: 'ATP Tradesoft',
-			href: '',
+			href: 'https://www.atptech.com/atp-tradesoft/',
 			badges: [],
 			location: 'İstanbul, Türkiye',
 			title: 'Software Engineer',
@@ -124,7 +124,7 @@ export const DATA = {
 		},
 		{
 			company: 'Turkish Aerospace Industries',
-			href: '',
+			href: 'https://www.tusas.com/',
 			badges: [],
 			location: 'Ankara, Türkiye',
 			title: 'Machine Learning Intern',
@@ -142,7 +142,7 @@ export const DATA = {
 		},
 		{
 			company: 'Civic Involvement Projects',
-			href: '',
+			href: 'https://cip.sabanciuniv.edu/tr',
 			badges: ['Volunteer'],
 			location: 'Sabancı University',
 			title: 'Project Leader',
@@ -168,7 +168,7 @@ export const DATA = {
 		},
 		{
 			school: 'Sakıp Sabancı Anatolian High School',
-			href: '',
+			href: 'https://sabancilisesi.meb.k12.tr/tema/okulumuz_hakkinda.php',
 			degree: 'High School Diploma · Graduation grade 90/100',
 			logoUrl: SakipSabanciLogo,
 			start: '2015',

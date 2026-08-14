@@ -1,10 +1,6 @@
 <script lang="ts">
 	import * as Avatar from '$lib/components/ui/avatar';
-	import { Badge } from '$lib/components/ui/badge';
-	import { cn } from '$lib/utils';
-	import { ChevronRightIcon } from 'lucide-svelte';
-	import { quartOut } from 'svelte/easing';
-	import { slide } from 'svelte/transition';
+	import ResumeCardBody from './ResumeCardBody.svelte';
 
 	export let logoUrl: string = '';
 	export let company: string = '';
@@ -19,7 +15,7 @@
 
 	let isExpanded = false;
 
-	// No logo files yet, so fall back to the organisation's initials (max 3).
+	// Falls back to the organisation's initials when there is no logo file.
 	$: monogram = company
 		.split(/\s+/)
 		.map((word) => word[0])
@@ -29,75 +25,68 @@
 
 	$: isExpandable = Boolean(description || bullets.length);
 
-	let handleClick = (e: MouseEvent) => {
-		if (isExpandable) {
-			e.preventDefault();
-			isExpanded = !isExpanded;
+	const toggle = () => (isExpanded = !isExpanded);
+
+	// The body holds a heading and a list, which a <button> may not contain, so
+	// it is a div carrying the button role — and therefore needs its own key
+	// handling to stay usable without a mouse.
+	const onKeydown = (event: KeyboardEvent) => {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			toggle();
 		}
 	};
+
+	const BODY_CLASS = 'group ml-4 flex-grow flex-col items-center text-left';
 </script>
 
-<a href={href || '#'} on:click={handleClick}>
-	<div class="flex rounded-lg bg-card text-card-foreground">
-		<div class="flex-none">
-			<Avatar.Root class="bg-muted-background m-auto size-12 border dark:bg-foreground">
-				<Avatar.Image src={logoUrl} alt={company} class="object-contain" />
-				<Avatar.Fallback class="text-xs font-semibold">{monogram}</Avatar.Fallback>
-			</Avatar.Root>
+<!--
+	The logo links to the organisation and the body toggles the detail. They are
+	siblings rather than nested: an <a> cannot wrap another <a>, and a card that
+	both navigates and expands on the same click can only ever do one of them.
+-->
+<div class="flex rounded-lg bg-card text-card-foreground">
+	<svelte:element
+		this={href ? 'a' : 'div'}
+		href={href || undefined}
+		target={href ? '_blank' : undefined}
+		rel={href ? 'noopener noreferrer' : undefined}
+		aria-label={href ? `${company} website` : undefined}
+		class="flex-none {href ? 'transition-opacity hover:opacity-80' : ''}"
+	>
+		<Avatar.Root class="bg-muted-background m-auto size-12 border dark:bg-foreground">
+			<Avatar.Image src={logoUrl} alt={company} class="object-contain" />
+			<Avatar.Fallback class="text-xs font-semibold">{monogram}</Avatar.Fallback>
+		</Avatar.Root>
+	</svelte:element>
+
+	<!-- Two static branches rather than one dynamic element: Svelte's a11y checks
+	     cannot see that role and tabindex are only set together. -->
+	{#if isExpandable}
+		<div
+			role="button"
+			tabindex="0"
+			aria-expanded={isExpanded}
+			on:click={toggle}
+			on:keydown={onKeydown}
+			class="{BODY_CLASS} cursor-pointer"
+		>
+			<ResumeCardBody
+				{company}
+				{title}
+				{subtitle}
+				{badges}
+				{description}
+				{bullets}
+				{start}
+				{end}
+				isExpandable={true}
+				{isExpanded}
+			/>
 		</div>
-		<div class="group ml-4 flex-grow flex-col items-center">
-			<div class="flex flex-col">
-				<div class="flex items-center justify-between gap-x-2 text-base">
-					<h3
-						class="inline-flex items-center justify-center gap-x-1 text-xs font-semibold leading-none sm:text-sm"
-					>
-						{company}
-						{#if badges?.length}
-							<span class="inline-flex gap-x-1">
-								{#each badges as badge}
-									<Badge variant="secondary" class="align-middle text-xs">
-										{badge}
-									</Badge>
-								{/each}
-							</span>
-						{/if}
-						{#if isExpandable}
-							<ChevronRightIcon
-								class={cn(
-									'size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100',
-									isExpanded ? 'rotate-90' : 'rotate-0'
-								)}
-							/>
-						{/if}
-					</h3>
-					<div class="text-right text-xs tabular-nums text-muted-foreground sm:text-sm">
-						{start} - {end || 'Present'}
-					</div>
-				</div>
-				{#if title}
-					<div class="font-sans text-xs">{title}</div>
-				{/if}
-				{#if subtitle}
-					<div class="font-sans text-xs text-muted-foreground">{subtitle}</div>
-				{/if}
-			</div>
-			{#if isExpanded}
-				<div class="mt-2 text-xs sm:text-sm" transition:slide={{ duration: 700, easing: quartOut }}>
-					{#if description}
-						<p>{description}</p>
-					{/if}
-					{#if bullets.length}
-						<ul class="mt-2 space-y-1.5 text-muted-foreground">
-							{#each bullets as bullet}
-								<li class="flex gap-2">
-									<span class="mt-[0.6em] h-px w-2 shrink-0 bg-muted-foreground/50"></span>
-									<span>{bullet}</span>
-								</li>
-							{/each}
-						</ul>
-					{/if}
-				</div>
-			{/if}
+	{:else}
+		<div class={BODY_CLASS}>
+			<ResumeCardBody {company} {title} {subtitle} {badges} {start} {end} />
 		</div>
-	</div>
-</a>
+	{/if}
+</div>
