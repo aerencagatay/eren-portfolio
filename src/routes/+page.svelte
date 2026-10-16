@@ -142,15 +142,42 @@
 		</div>
 	</section>
 
+	<section id="languages">
+		<div class="flex min-h-0 flex-col gap-y-3">
+			<BlurFade delay={BLUR_FADE_DELAY}>
+				<h2 class="text-xl font-bold">Languages</h2>
+			</BlurFade>
+			<BlurFade delay={BLUR_FADE_DELAY * 1.2}>
+				<div class="flex flex-wrap gap-x-6 gap-y-1 text-sm">
+					{#each DATA.languages as language}
+						<span>
+							<span class="font-medium">{language.name}</span>
+							<span class="text-muted-foreground">— {language.level}</span>
+						</span>
+					{/each}
+				</div>
+			</BlurFade>
+		</div>
+	</section>
+
 	<section id="skills">
 		<div class="flex min-h-0 flex-col gap-y-3">
 			<BlurFade delay={BLUR_FADE_DELAY}>
 				<h2 class="text-xl font-bold">Skills</h2>
 			</BlurFade>
-			<div class="flex flex-wrap gap-1">
-				{#each DATA.skills as skill, id}
-					<BlurFade delay={BLUR_FADE_DELAY * id + 0.002}>
-						<Badge>{skill}</Badge>
+			<div class="flex flex-col gap-y-3">
+				{#each DATA.skills as group, id}
+					<BlurFade delay={BLUR_FADE_DELAY * 1.2 + id * 0.05}>
+						<div class="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-x-4">
+							<span class="shrink-0 text-xs font-medium text-muted-foreground sm:w-44">
+								{group.label}
+							</span>
+							<div class="flex flex-wrap gap-1">
+								{#each group.items as skill}
+									<Badge>{skill}</Badge>
+								{/each}
+							</div>
+						</div>
 					</BlurFade>
 				{/each}
 			</div>

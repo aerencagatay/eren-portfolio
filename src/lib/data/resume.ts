@@ -26,7 +26,7 @@ export const ORIGIN = 'https://aerencagatay.github.io';
  * Every piece of CV content on the site lives here — the page reads from this
  * object and nothing else, so a fact only ever needs changing in one place.
  *
- * A blank `logoUrl` falls back to the organisation's initials. To fill one in,
+ * A blank logoUrl falls back to the organisation's initials. To fill one in,
  * drop the file into src/lib/imgs/, import it above and set it here.
  */
 export const DATA = {
@@ -36,37 +36,48 @@ export const DATA = {
 	location: 'İstanbul, Türkiye',
 	locationLink: 'https://www.google.com/maps/place/istanbul',
 	description:
-		'Software Engineer in financial technology. I build the data-intensive, business-critical systems capital markets run on.',
-	// Links here are hash-only on purpose: `marked` renders them verbatim, so a
-	// leading slash would skip `paths.base` and break the prerender.
+		'Software Engineer in financial technology. I build and run the market data systems financial institutions depend on.',
+	// Links here are hash-only on purpose: marked renders them verbatim, so a
+	// leading slash would skip paths.base and break the prerender.
 	summary:
-		'I am a software engineer at [ATP Tradesoft](#work), where I build and maintain systems for a fast-paced capital-markets environment — backend services, stored procedures, data-processing components and system integrations, in a domain where data accuracy and reliability are not optional. I hold a [B.S. in Computer Science Engineering with a Minor in Finance from Sabancı University](#education), which I attended on a full merit scholarship. Before that I trained anomaly-detection models at Turkish Aerospace Industries, and my [graduation project](#projects) paired a deep neural network with NLP feature engineering to price used cars and flag mispriced listings. I am drawn to problems where software engineering, financial domain knowledge and quantitative modelling meet.',
+		"I am a software engineer at [ATP Tradesoft](#work), where I own production reliability for a market data platform that several financial institutions run on — leading incident diagnosis across the application, messaging, infrastructure and database layers, and building the backend services and APIs behind real-time and delayed market data. I also work at the product edge: I spotted a client need our in-house platform could meet, validated the feasibility with engineering leadership, and helped turn it into the product's first sale to an external institution. I hold a [B.S. in Computer Science Engineering with a Minor in Finance from Sabancı University](#education), which I attended on a full merit scholarship, and my [graduation project](#projects) paired a deep neural network with NLP feature engineering to price used cars and flag mispriced listings.",
 	avatarUrl: ProfileImg,
+	// Grouped the way the CV groups them — a flat row of ~36 badges reads as noise.
 	skills: [
-		'Python',
-		'SQL',
-		'C#',
-		'.NET',
-		'C++',
-		'Java',
-		'JavaScript',
-		'PyTorch',
-		'Node.js',
-		'MySQL',
-		'JupyterLab',
-		'Deep Learning',
-		'Anomaly Detection',
-		'NLP Feature Engineering',
-		'Reinforcement Learning',
-		'Predictive Modeling',
-		'Backend Development',
-		'Database Programming',
-		'Stored Procedures',
-		'System Integration',
-		'Data Processing',
-		'Financial Markets',
-		'Capital-Markets Technology',
-		'Compliance-Sensitive Software'
+		{ label: 'Languages', items: ['C#', 'JavaScript', 'Python', 'Java', 'C++', 'SQL'] },
+		{ label: 'Backend & Messaging', items: ['.NET', 'Node.js', 'REST APIs', 'NATS JetStream'] },
+		{
+			label: 'Databases & Data',
+			items: ['MySQL', 'Microsoft SQL Server', 'PostgreSQL', 'Altibase', 'Redis', 'QuestDB']
+		},
+		{
+			label: 'Infrastructure & Monitoring',
+			items: ['Kubernetes', 'Docker', 'Elasticsearch', 'Kibana', 'Git', 'Azure DevOps']
+		},
+		{
+			label: 'AI Tools & LLMs',
+			items: [
+				'Claude Code',
+				'Cursor',
+				'OpenAI Codex',
+				'MCP',
+				'Multi-agent Workflows',
+				'RAG',
+				'OpenAI API'
+			]
+		},
+		{
+			label: 'Software Engineering',
+			items: [
+				'OOP',
+				'SOLID',
+				'Design Patterns',
+				'Data Structures & Algorithms',
+				'System Integration',
+				'Debugging',
+				'Performance Optimization'
+			]
+		}
 	],
 	navbar: [
 		{ href: '/', icon: HomeIcon, label: 'Home' },
@@ -108,18 +119,16 @@ export const DATA = {
 			location: 'İstanbul, Türkiye',
 			title: 'Software Engineer',
 			logoUrl: AtpLogo,
-			start: 'March 2024',
+			start: 'August 2024',
 			end: 'Present',
 			description:
-				'Building and maintaining software for a fast-paced financial technology and capital-markets environment.',
+				'Production ownership, backend services and APIs for a market data platform serving multiple financial institutions.',
 			bullets: [
-				'Develop and maintain software systems used within a fast-paced financial technology and capital-markets environment.',
-				'Work with financial data structures, market data, database-driven applications, and business-critical financial workflows.',
-				'Develop backend services, stored procedures, data-processing components, and system integrations.',
-				'Translate financial and operational requirements into reliable and scalable software solutions.',
-				'Collaborate with software, database, infrastructure, product, and business teams throughout the development lifecycle.',
-				'Contribute to compliance-sensitive systems where data accuracy, reliability, and performance are essential.',
-				'Investigate production issues, analyze data flows, and implement improvements to system stability and maintainability.'
+				'Translate customer and business needs into technical requirements and implementation plans, balancing customer priorities, technical feasibility, and development effort with product and engineering teams.',
+				'Own production reliability and technical operations for a business-critical market data platform serving multiple financial institutions, leading incident diagnosis and resolution across application, messaging, infrastructure, and database layers.',
+				"Identified a client need that could be met by an in-house market data platform, validated technical feasibility with engineering leadership, and proposed the solution, helping secure the product's first sale to an external financial institution.",
+				'Develop and maintain backend services, APIs, and database components for financial-market and brokerage operations, supporting real-time and delayed market data delivery.',
+				'Use Claude, MCP integrations, and multi-agent workflows to accelerate development, compare implementation approaches, and evaluate new AI tools for engineering use.'
 			]
 		},
 		{
@@ -131,13 +140,11 @@ export const DATA = {
 			logoUrl: TaiLogo,
 			start: 'July 2023',
 			end: 'August 2023',
-			description:
-				'Anomaly detection on large-scale datasets, plus reinforcement-learning experiments.',
+			description: 'Anomaly detection and regression modelling on large datasets.',
 			bullets: [
-				'Developed machine-learning models for anomaly detection in large-scale datasets.',
-				'Explored reinforcement-learning-based approaches using Python, PyCharm, and JupyterLab.',
-				'Processed and analyzed complex datasets to identify significant patterns and abnormal observations.',
-				'Evaluated model outputs and gained practical experience in experimental machine-learning workflows.'
+				'Developed anomaly-detection models and explored reinforcement-learning approaches using Python.',
+				'Applied cross-validation and Ridge/Lasso regularization to regression models to assess generalization and reduce overfitting.',
+				'Evaluated regression performance using MAE, RMSE, and R²; performed residual analysis to identify systematic prediction errors.'
 			]
 		},
 		{
@@ -175,14 +182,18 @@ export const DATA = {
 			end: '2019'
 		}
 	],
+	languages: [
+		{ name: 'Turkish', level: 'Native' },
+		{ name: 'English', level: 'Advanced — IELTS 7.5' }
+	],
 	projects: [
 		{
 			title: 'Car Price Prediction & Market Anomaly Detection',
 			href: '',
-			dates: 'Feb 2023 - Jan 2024',
+			dates: 'September 2024 - June 2025',
 			active: true,
 			description:
-				'**Graduation project.** An end-to-end used-car price prediction system built on a deep neural network. NLP-based feature engineering pulls signal out of unstructured Turkish vehicle descriptions, the model estimates fair market value and flags listings that look underpriced or overpriced, and a real-time Twitter bot puts those calls in front of ordinary buyers. Data collection, preprocessing, modelling, evaluation and deployment all live in one pipeline.',
+				'**Graduation project.** An end-to-end used-car price prediction system built on a deep neural network. NLP-based feature engineering pulls signal out of unstructured Turkish vehicle descriptions, the model estimates fair market value and flags listings that look underpriced or overpriced, and a real-time Twitter bot puts those calls in front of ordinary buyers. Data collection, preprocessing, model inference and deployment all live in one pipeline.',
 			technologies: ['Python', 'PyTorch', 'Deep Learning', 'NLP', 'Twitter API'],
 			links: [],
 			image: '',
