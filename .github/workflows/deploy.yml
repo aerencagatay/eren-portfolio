@@ -23,9 +23,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build
-        env:
-          BASE_PATH: /eren-portfolio
+      # Type-checks every site's data, so one malformed resume.ts fails the run here
+      # instead of shipping a broken page.
+      - run: npm run check
+      # Builds each folder in sites/ with its own base path and assembles them into
+      # build/ — the root site at the top, everyone else in build/<folder>/.
+      - run: npm run build:all
       - uses: actions/upload-pages-artifact@v3
         with:
           path: build

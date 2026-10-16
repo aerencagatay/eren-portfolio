@@ -7,3 +7,4 @@ yarn.lock
 .svelte-kit
 build
 node_modules
+.build

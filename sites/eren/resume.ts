@@ -1,4 +1,5 @@
 import { CodeIcon, HomeIcon, TrophyIcon } from 'lucide-svelte';
+import type { Resume } from '$lib/types';
 
 // Navbar / contact icons
 import GithubSvg from '$lib/imgs/github.svg';
@@ -10,31 +11,39 @@ import GmailDarkSvg from '$lib/imgs/gmail-dark.svg';
 import LinkedinSvg from '$lib/imgs/linkedin.svg';
 import LinkedinDarkSvg from '$lib/imgs/linkedin-dark.svg';
 
-import ProfileImg from '$lib/imgs/profile.jpg';
+import ProfileImg from './imgs/profile.jpg';
 
 // Organisation logos — all square, which is what the 48px circular badge wants.
-import AtpLogo from '$lib/imgs/atp-tradesoft.jpg';
-import TaiLogo from '$lib/imgs/turkish-aerospace.jpg';
-import SabanciLogo from '$lib/imgs/sabanci-university.png';
-import SakipSabanciLogo from '$lib/imgs/sakip-sabanci-high-school.jpg';
-import CipLogo from '$lib/imgs/civic-involvement-projects.jpg';
-
-/** Scheme + host only — og:image needs an absolute URL and avatarUrl already carries the base path. */
-export const ORIGIN = 'https://aerencagatay.github.io';
+import AtpLogo from './imgs/atp-tradesoft.jpg';
+import TaiLogo from './imgs/turkish-aerospace.jpg';
+import SabanciLogo from './imgs/sabanci-university.png';
+import SakipSabanciLogo from './imgs/sakip-sabanci-high-school.jpg';
+import CipLogo from './imgs/civic-involvement-projects.jpg';
 
 /**
- * Every piece of CV content on the site lives here — the page reads from this
- * object and nothing else, so a fact only ever needs changing in one place.
+ * Eren's CV content — the shared page reads this object and nothing else.
+ * Shape is enforced by Resume in src/lib/types.ts; see sites/README.md.
  *
- * A blank logoUrl falls back to the organisation's initials. To fill one in,
- * drop the file into src/lib/imgs/, import it above and set it here.
+ * Personal images live in ./imgs next to this file. A blank logoUrl falls
+ * back to the organisation's initials.
  */
-export const DATA = {
+export const DATA: Resume = {
 	name: 'Ahmet Eren Çağatay',
+	shortName: 'Eren',
 	initials: 'AEC',
+	role: 'Software Engineer',
 	url: 'https://aerencagatay.github.io/eren-portfolio',
 	location: 'İstanbul, Türkiye',
 	locationLink: 'https://www.google.com/maps/place/istanbul',
+	address: { locality: 'İstanbul', country: 'TR' },
+	copy: {
+		projectsTitle: 'Machine learning, end to end',
+		projectsBlurb:
+			'Two projects I took from raw data all the way to something people could actually use — one priced a used-car market, the other cut cost out of a supply chain.',
+		achievementsTitle: 'A couple I am proud of',
+		contactLead: 'Want to talk about an opportunity or just compare notes on fintech engineering?',
+		contactTail: 'I read everything and reply when I can.'
+	},
 	description:
 		'Software Engineer in financial technology. I build and run the market data systems financial institutions depend on.',
 	// Links here are hash-only on purpose: marked renders them verbatim, so a
