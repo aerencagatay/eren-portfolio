@@ -1,0 +1,8 @@
+# Keep LF everywhere. Prettier enforces LF, and without this, Windows checkouts
+# (core.autocrlf) turn files into CRLF: lint then fails locally and every
+# `npm run format` shows a dozen files as modified with no real change.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary

@@ -48,6 +48,9 @@ export interface EducationEntry {
 	logoUrl: string;
 	start: string;
 	end: string;
+	/** Optional detail — giving either makes the card expandable, like a work entry. */
+	description?: string;
+	bullets?: string[];
 }
 
 export interface SkillGroup {
@@ -94,6 +97,8 @@ export interface Achievement {
  * default in the page, so a new site reads sensibly before anyone writes copy.
  */
 export interface Copy {
+	/** Heading of the work section. Defaults to "Work Experience". */
+	workTitle?: string;
 	projectsTitle?: string;
 	projectsBlurb?: string;
 	achievementsTitle?: string;
